@@ -1,3 +1,9 @@
+npm create vite@latest
+npm i react-router-dom@6.14.2
+npm i styled-reset
+npm i styled-components@6.0.7
+npm i @types/styled-components -D
+
 Git init
 보통 프로젝트를 처음 시작할 때 git 저장소를 만들기 위해 사용한다. '초기화'한다는 뜻이지만 내용이 존재하지 않아도 상관없다. git이라는 디렉터리를 빈 저장소로 만들어 준다는 의미로 입력해보자!
 
