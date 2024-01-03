@@ -1,11 +1,52 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { auth } from "../firebase";
 
-const Wrapper = styled.div``
-const Menu = styled.div``
-const MenuItem = styled.div``
+const Wrapper = styled.div`
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 4fr;
+    height: 100%;
+    padding: 50px 0px;
+    width:100%;
+    max-width: 860px;
+`
+const Menu = styled.div`
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap:20px;
+`
+const MenuItem = styled.div`
+    cursor: pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid white;
+    height:50px;
+    width:50px;
+    border-radius:50%
+    svg{
+        width:30px;
+        fill:white;
+    }
+    &.log-out{
+        border-color:tomato;
+        svg{
+            fill:tomato;
+        }
+    }
+`
 
 export default function Layout() {
+    const navigate = useNavigate()
+    const onLogOut = async() =>{
+        const ok = confirm("로그아웃 하시겠습니까?")
+        if (ok) {
+            await auth.signOut()
+            navigate('/login')
+        }
+    }
     return(
         <>
             <Wrapper>
@@ -26,7 +67,7 @@ export default function Layout() {
                         </MenuItem>
                     </Link>
 
-                    <MenuItem>
+                    <MenuItem onClick={onLogOut} className="log-out">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                         </svg>
