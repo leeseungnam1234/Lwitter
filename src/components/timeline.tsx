@@ -1,4 +1,4 @@
-import { collection, getDocs, limit, onSnapshot, orderBy, query } from "firebase/firestore"
+import { collection,  limit, onSnapshot, orderBy, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 // import { Wrapper } from "./auth-components"
 import styled from "styled-components"
