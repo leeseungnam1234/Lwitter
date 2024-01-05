@@ -36,7 +36,7 @@ const DeleteButton = styled.button`
     padding:5px 10px;
     text-transform:uppercase;
     border-radius:5px;
-    cursor: pointer;
+    cursor:pointer;
 `
 
 export default function Tweet ({username, photo, tweet, userId,id}:ITweet){
@@ -53,6 +53,7 @@ export default function Tweet ({username, photo, tweet, userId,id}:ITweet){
         } catch (e) {
             console.log(e);
         } finally{
+            // 
         }
     }
     return(
