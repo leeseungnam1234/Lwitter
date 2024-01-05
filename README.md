@@ -1,3 +1,6 @@
+재변경 , 배포시
+npm run deploy
+
 npm create vite@latest
 npm i react-router-dom@6.14.2
 npm i styled-reset
