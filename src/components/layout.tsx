@@ -43,7 +43,7 @@ export default function Layout() {
     const onLogOut = async() =>{
         const ok = confirm("로그아웃 하시겠습니까?")
         if (ok) {
-            await auth.signOut()
+            await auth.signOut() // Firebase파일에서 생성한 auth인스턴스를 호출한 다음 로그아웃
             navigate('/login')
         }
     }

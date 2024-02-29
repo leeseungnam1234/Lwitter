@@ -11,14 +11,17 @@ import LoadingScreen from "./components/loading-screen"
 import { auth } from "./firebase"
 import ProtectedRoute from "./components/protected-route"
 
+// 배열을 routes에 전달
 const router = createBrowserRouter([
     {
         path:'/',
         element:
             <ProtectedRoute>
-                <Layout/>
+                {/* 인증된 사용자에게만 보여줌 */}
+                <Layout/> 
             </ProtectedRoute>    
         ,
+        //route를 넣을 또다른 배열 추가 , layout Component 내부에서 render
         children:[
             {
                 path:'',
@@ -31,10 +34,12 @@ const router = createBrowserRouter([
         ]
     },
     {
+        // 로그인 페이지
         path:'/login',
         element:<Login/>
     },
     {
+        // 회원가입 페이지
         path:'create-account',
         element:<CreateAccount/>
     }
@@ -59,18 +64,23 @@ const Wrapper = styled.div`
 `
 
 function App() {
+    // 사용자가 로그인 했는지 여부를 Firebase가 체크하는동안 로딩 화면을 보여줌
     const [isLoading, setLoading] = useState(true)
     const init = async()=>{
-        await auth.authStateReady()
-        setLoading(false)
+        // 인증 상태가 준비되었는지를 기달림, 최초 인증 상태가 완료될 때 실행되는 Promise을 return
+        // Firebase가 쿠키,토큰을 읽고 백엔드와 소통해서 로그인 여부를 확인 하는동안 기달림
+        
+        await auth.authStateReady() 
+        setLoading(false) // Firebase가 준비되면 false로 변경
     }
     useEffect(()=>{
+        //맨처음 렌더링시 실행
         init()
-    },[])
+    },[]/**의존성 배열*/)
 
     return (
-        <Wrapper>
-            <GlobalStyles/>
+        <Wrapper>            
+            <GlobalStyles/> {/* 글로벌 css */}
             {isLoading ? <LoadingScreen/> : <RouterProvider router={router}/>}
         </Wrapper>
     )
