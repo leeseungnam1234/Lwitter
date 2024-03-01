@@ -6,12 +6,13 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { Error, Form, Input, Switcher, Title, Wrapper } from '../components/auth-components'
 import GithubButton from "../components/github-btn"
 import GoogleButton from "../components/google-btn"
+import Pwreset from '../components/pw-reset'
 // const errors = {
 //     'auth/email-already-in-use' : 'That email already exists'
 // }
 
 
-
+// 하는 일은 form으로부터 이메일과 암호를 가져옴
 export default function CreateAccount() {
     const navigate = useNavigate()
     const [isLoading, setLoading] = useState(false)
@@ -19,6 +20,7 @@ export default function CreateAccount() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
+    // 데이터를 state에 올리는 코드
     const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {
             target: {name, value}
@@ -35,11 +37,11 @@ export default function CreateAccount() {
         if (isLoading ||  email === '' || password === '') return
         try {
             setLoading(true)
-            await signInWithEmailAndPassword(auth,email,password)
+            await signInWithEmailAndPassword(auth,email,password) // 사용자가 form을 저장하면 함수 호출, Auth 인스턴스와 이메일 비밀번호 필요
             navigate('/')
         } catch (e) {
             if (e instanceof FirebaseError) {
-                setError(e.message)
+                setError(e.message) // 비밀번호가 잘못되면 state를 설정해서 알려줌
             }
         } finally {
             setLoading(false)
@@ -48,7 +50,7 @@ export default function CreateAccount() {
 
     return (
         <Wrapper>
-            <Title>로그인 ♡</Title>
+            <Title>로그인 해주세요</Title>
             <Form onSubmit={onSubmit}>
                 <Input 
                     onChange={onChange}
@@ -73,6 +75,9 @@ export default function CreateAccount() {
                         회원가입
                         <Link to='/create-account'>하러가기 &rarr;</Link>
                     </Switcher>
+                        비밀번호
+                        <Link to='/pw-reset-test'>찾기 &rarr;</Link>
+                    <Pwreset/>
                 <GithubButton/>
                 <GoogleButton/>
         </Wrapper>

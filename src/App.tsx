@@ -15,7 +15,9 @@ const router = createBrowserRouter([
     {
         path:'/',
         element:
-            <ProtectedRoute>
+        // 기본값은 Login 페이지 , ProtectedRoute로 감싸줬기 때문에
+        // ProtectedRoute는 firebase에게 로그인한 사용자가 누구인지 물어보는 route
+            <ProtectedRoute> 
                 <Layout/>
             </ProtectedRoute>    
         ,
@@ -61,8 +63,8 @@ const Wrapper = styled.div`
 function App() {
     const [isLoading, setLoading] = useState(true)
     const init = async()=>{
-        await auth.authStateReady()
-        setLoading(false)
+        await auth.authStateReady() // 사용자가 로그인 했는지 확인, 누구인지 정보를 기달림
+        setLoading(false) // 정보를 받은 다음 false로 설정하고 사용자를 router로 보냄
     }
     useEffect(()=>{
         init()
