@@ -6,11 +6,10 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { Error, Form, Input, Switcher, Title, Wrapper } from '../components/auth-components'
 import GithubButton from "../components/github-btn"
 import GoogleButton from "../components/google-btn"
-import Pwreset from '../components/pw-reset'
+import Button from '../routes/blog-button'
 // const errors = {
 //     'auth/email-already-in-use' : 'That email already exists'
 // }
-
 
 // 하는 일은 form으로부터 이메일과 암호를 가져옴
 export default function CreateAccount() {
@@ -75,9 +74,11 @@ export default function CreateAccount() {
                         회원가입
                         <Link to='/create-account'>하러가기 &rarr;</Link>
                     </Switcher>
+                    <Switcher>
                         비밀번호
-                        <Link to='/pw-reset-test'>찾기 &rarr;</Link>
-                    <Pwreset/>
+                        <Link to='/pw-reset'>찾기 &rarr;</Link>
+                    </Switcher>
+                <Button/>
                 <GithubButton/>
                 <GoogleButton/>
         </Wrapper>

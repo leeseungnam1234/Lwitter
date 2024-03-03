@@ -41,6 +41,7 @@ export const Error = styled.span`
 `
 export const Switcher = styled.span`
     margin-top: 20px;
+    font-size: 20px;
     a{
         margin-left:10px;
         color: #1d9bf0;

@@ -2,6 +2,10 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
 
+const Logo = styled.img`
+    height:25px;
+    background-color: white;
+`
 const Wrapper = styled.div`
     display: grid;
     gap: 20px;
@@ -72,6 +76,13 @@ export default function Layout() {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15" />
                         </svg>
                     </MenuItem>
+
+                    <Link to='/blog'>
+                        <MenuItem>
+                            <Logo src="/public/wordpress.svg"/>
+                        </MenuItem>
+                    </Link>
+
                 </Menu>
                 <Outlet/>
             </Wrapper>

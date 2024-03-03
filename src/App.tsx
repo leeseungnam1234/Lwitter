@@ -10,6 +10,9 @@ import { useEffect, useState } from "react"
 import LoadingScreen from "./components/loading-screen"
 import { auth } from "./firebase"
 import ProtectedRoute from "./components/protected-route"
+import PwReset from "./routes/pw-reset"
+import Blog from './routes/blog'
+import Blogbutton from "./routes/blog-button"
 
 const router = createBrowserRouter([
     {
@@ -39,6 +42,18 @@ const router = createBrowserRouter([
     {
         path:'create-account',
         element:<CreateAccount/>
+    },
+    {
+        path:'/pw-reset',
+        element:<PwReset/>
+    },
+    {
+        path:'blog',
+        element:<Blog/>
+    },
+    {
+        path:'blog-button',
+        element:<Blogbutton/>
     }
 ])
 

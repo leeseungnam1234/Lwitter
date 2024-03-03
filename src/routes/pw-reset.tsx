@@ -7,11 +7,12 @@ import styled from "styled-components";
     // 스타일을 적용할 컨테이너 요소입니다.
     const Container = styled.div`
     max-width: 400px;
+    max-height: 200px;
     margin: 15px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    background-color: #1a119e;
+    background-color: #1e1695;
     `;
 
     // 제목을 스타일링한 컴포넌트입니다.
