@@ -67,8 +67,8 @@ const router = createBrowserRouter([
         element:<ListPage/>
     },
     {
-        path:'contentsPage',
-        element:<ContentsPage/>
+        path:'contents/:id',
+        element:<ContentsPage/> // 클릭한 콘텐츠로 이동
     }
 ])
 

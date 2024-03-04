@@ -1,5 +1,11 @@
 재변경 , 배포시
 npm run deploy
+===========
+다음 할 일
+
+1. 블로그 작성 시 제대로 글이 나오도록 수정
+2. 
+===========
 
 npm create vite@latest
 npm i react-router-dom@6.14.2

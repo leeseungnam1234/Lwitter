@@ -1,6 +1,6 @@
 import { useState, ChangeEvent, useEffect } from "react";
-import { useHistory } from "react-router-dom"; // useHistory 가져오기 추가
-import { db, storage, auth } from "../firebase"; // auth 가져오기 추가
+import { useNavigate } from "react-router-dom";
+import { db, storage, auth } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { User } from "firebase/auth";
@@ -44,8 +44,8 @@ const Upload = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
-  const [user, setUser] = useState<User | null>(null); // 사용자 상태 추가
-  const history = useHistory(); // useHistory 호출 위치 변경
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -71,7 +71,6 @@ const Upload = () => {
 
   const uploadContent = async () => {
     if (!user) {
-      // 사용자가 로그인되지 않은 경우에는 업로드를 중단
       console.log("사용자가 로그인되지 않았습니다.");
       return;
     }
@@ -83,11 +82,12 @@ const Upload = () => {
       imageUrl = await getDownloadURL(ref(storage, `images/${image.name}`));
     }
 
-    await addDoc(collection(db, "contents"), { title, content, imageUrl });
+    const sanitizedContent = content.replace(/<\/?[^>]+(>|$)/g, "");
+
+    await addDoc(collection(db, "contents"), { title, content, sanitizedContent, imageUrl });
     console.log("Uploaded!");
 
-    // 업로드가 완료되면 리스트 페이지로 이동
-    history.push("/list");
+    navigate("/listPage");
   };
 
   return (
@@ -95,7 +95,7 @@ const Upload = () => {
       <Input id="title" type="text" placeholder="제목을 입력해주세요." onChange={handleOnChange} />
       <Textarea id="content" placeholder="내용을 입력해주세요." onChange={handleOnChange} />
       <Input id="image" type="file" onChange={handleImageChange} />
-      {user && <Button onClick={uploadContent}>업로드</Button>} {/* 사용자가 로그인한 경우에만 버튼 표시 */}
+      {user && <Button onClick={uploadContent}>업로드</Button>}
     </Container>
   );
 };
