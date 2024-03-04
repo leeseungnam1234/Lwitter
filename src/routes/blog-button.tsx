@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import styled from "styled-components"
 import { Link } from 'react-router-dom'
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Logo = styled.img`
     height:25px;
     background-color: white;
 `
 
+// eslint-disable-next-line react-refresh/only-export-components
 const Button = styled.span`
     margin-top:40px;
     background-color: white;
@@ -28,7 +30,7 @@ export default class Blogbutton extends Component {
   render() {
     return (
       <Button>
-        <Link to='/blog'>
+        <Link to='/listPage'>
             <Logo src="/public/wordpress.svg"/>
         </Link>
       </Button>

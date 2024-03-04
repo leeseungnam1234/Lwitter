@@ -13,6 +13,8 @@ import ProtectedRoute from "./components/protected-route"
 import PwReset from "./routes/pw-reset"
 import Blog from './routes/blog'
 import Blogbutton from "./routes/blog-button"
+import ListPage from './routes/listPage'
+import ContentsPage from "./routes/contentsPage"
 
 // 배열을 routes에 전달
 const router = createBrowserRouter([
@@ -59,6 +61,14 @@ const router = createBrowserRouter([
     {
         path:'blog-button',
         element:<Blogbutton/>
+    },
+    {
+        path:'listPage',
+        element:<ListPage/>
+    },
+    {
+        path:'contentsPage',
+        element:<ContentsPage/>
     }
 ])
 

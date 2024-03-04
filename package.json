@@ -12,6 +12,7 @@
     "deploy": "firebase deploy"
   },
   "dependencies": {
+    "@react-firebase/auth": "^0.2.10",
     "firebase": "^10.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -91,7 +91,7 @@ export default function CreateAccount() {
                         비밀번호
                         <Link to='/pw-reset'>찾기 &rarr;</Link>
                     </Switcher>
-                    <Button/>
+                    <Button/> {/* 블로그 버튼 */}
                 <GithubButton/>
                 <GoogleButton/>
         </Wrapper>
