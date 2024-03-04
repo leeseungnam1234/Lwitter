@@ -10,13 +10,18 @@ import { useEffect, useState } from "react"
 import LoadingScreen from "./components/loading-screen"
 import { auth } from "./firebase"
 import ProtectedRoute from "./components/protected-route"
+import PwReset from "./routes/pw-reset"
+import Blog from './routes/blog'
+import Blogbutton from "./routes/blog-button"
 
 // 배열을 routes에 전달
 const router = createBrowserRouter([
     {
         path:'/',
         element:
-            <ProtectedRoute>
+        // 기본값은 Login 페이지 , ProtectedRoute로 감싸줬기 때문에
+        // ProtectedRoute는 firebase에게 로그인한 사용자가 누구인지 물어보는 route
+            <ProtectedRoute> 
                 {/* 인증된 사용자에게만 보여줌 */}
                 <Layout/> 
             </ProtectedRoute>    
@@ -42,6 +47,18 @@ const router = createBrowserRouter([
         // 회원가입 페이지
         path:'create-account',
         element:<CreateAccount/>
+    },
+    {
+        path:'/pw-reset',
+        element:<PwReset/>
+    },
+    {
+        path:'blog',
+        element:<Blog/>
+    },
+    {
+        path:'blog-button',
+        element:<Blogbutton/>
     }
 ])
 
@@ -70,8 +87,8 @@ function App() {
         // 인증 상태가 준비되었는지를 기달림, 최초 인증 상태가 완료될 때 실행되는 Promise을 return
         // Firebase가 쿠키,토큰을 읽고 백엔드와 소통해서 로그인 여부를 확인 하는동안 기달림
         
-        await auth.authStateReady() 
-        setLoading(false) // Firebase가 준비되면 false로 변경
+        await auth.authStateReady()  // 사용자가 로그인 했는지 확인, 누구인지 정보를 기달림
+        setLoading(false) // Firebase가 준비되면 false로 변경 // 정보를 받은 다음 false로 설정하고 사용자를 router로 보냄
     }
     useEffect(()=>{
         //맨처음 렌더링시 실행

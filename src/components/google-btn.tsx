@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 const Button = styled.span`
     margin-top:20px;
-    background-color: #ffffff;
+    background-color: white;
     font-weight:500;
     width:100%;
     color:black;
@@ -36,7 +36,7 @@ export default function GoogleButton() {
     }
     return (
         <Button onClick={onClick}>
-            <Logo src='/public/icons8-구글-로고-48.png'/>
+            <Logo src="/public/google-icon.png"/>
             Google 로그인
         </Button>
     )

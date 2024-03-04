@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom"
 import { auth } from "../firebase"
 
+// 만약 로그인 되지 않았다면, 사용자가 Protected의 하위 페이지를 못보게 막음
 export default function ProtectedRoute({
     children,
 }: {
@@ -8,7 +9,7 @@ export default function ProtectedRoute({
 }) {
     // Firebase 파일에 있는 auth를 사용 auth.currentUser는 유저가 로그인했는지 여부를 알려줌
     // 로그인 되어 있는 user의 값을 주거나 null을 넘겨줌
-    const user = auth.currentUser 
+    const user = auth.currentUser  // currentUser로 로그인 사용자의 정보를 얻을 수 있음
     if (user === null) {
         return <Navigate to='/login' /> // navigate는 user를 다른 곳으로 리다이렉트 해주는 컴포넌트
     }

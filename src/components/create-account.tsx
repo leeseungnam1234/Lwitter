@@ -17,6 +17,12 @@ const errors:ErrorMessages = {
     // 해당 오류 코드 : 알림 메세지
 }
 
+// const errors = {
+//     'auth/email-already-in-use' : '아이디 또는 비밀번호가 틀립니다.'
+//      firebase 안에서 일어나는 코드 : 사용자에게 보여줄 에러 메세지
+// }
+
+
 export default function CreateAccount() {
     const navigate = useNavigate()
     const [isLoading, setLoading] = useState(false) // 계정 생성을 시작할 때 true로 바꿈
@@ -28,6 +34,7 @@ export default function CreateAccount() {
     
 
     // 이벤트를 가져와서 type은 HTML INPUT 개체의 React.ChangeEvent가 됨
+    // 이름,이메일,비밀번호 데이터를 가져와서 state에 넘겨줌
     const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {
             // event에서 target을 추출
@@ -43,9 +50,11 @@ export default function CreateAccount() {
         // input 이 변경되면 어떤 input 이 변경 되었는지 확인 가능
     }
     
-    const onSubmit =async (e:React.FormEvent<HTMLFormElement>) => { // FormEvent 이건 submit를 위한 이벤트
+    // const onSubmit =async (e:React.FormEvent<HTMLFormElement>) => { // FormEvent 이건 submit를 위한 이벤트
         // preventDefault   이벤트가 발생했을 때 브라우저가 일반적으로 수행하는 동작을 막을 수 있음
         // 화면이 새로고침 되지 않도록 preventDefault 해줌
+
+    const onSubmit =async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         setError('')
@@ -63,11 +72,16 @@ export default function CreateAccount() {
             /** createUserWithEmailAndPassword는 await 안에서만 사용 가능 , auth 인증 인스턴스 넣어야됨
             그 다음 User의 Email과 PW가 필요함 , credentials -> 사용자 자격증명 
             계정을 만들려고 시도 , 성공하면 자격 증명을 받게 되고 , 성공하면 사용자는 app에 즉시 로그인됨*/
-            const credentials = await createUserWithEmailAndPassword(auth,email,password)
-
-            console.log(credentials.user); // 확인을 위해서 남겨둠
 
             // 사용자 프로필을 업데이트
+
+            // 이름,이메일,비밀번호 작성을 마치면 이 함수를 호출 , 간단하게 계정을 생성 할 수 있음
+            // 똑같이 Auth 인스턴스와 비밀번호, 이메일이 필요함
+            const credentials = await createUserWithEmailAndPassword(auth,email,password) 
+            // 이렇게 사용자가 생성된 후 해당 사용자에 대한 자격증명을 받아와야함
+            // 그 다음 즉시 사용자의 프로필을 업데이트
+            // 사용자 프로필에 표시될 이름(display name)과 아바타 URL을 설정 할 수 있음
+            console.log(credentials.user);
             await updateProfile(credentials.user,{
                 displayName:name
             })
