@@ -79,7 +79,7 @@ export default function Layout() {
 
                     <Link to='/blog'>
                         <MenuItem>
-                            <Logo src="/public/wordpress.svg"/>
+                            <Logo src="/wordpress.svg"/>
                         </MenuItem>
                     </Link>
 

@@ -36,7 +36,7 @@ export default function GoogleButton() {
     }
     return (
         <Button onClick={onClick}>
-            <Logo src="/public/google-icon.png"/>
+            <Logo src="/google-icon.png"/>
             Google 로그인
         </Button>
     )

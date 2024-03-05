@@ -43,6 +43,7 @@ const Button = styled.button`
 const Upload = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [sanitizedContent, setSanitizedContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ const Upload = () => {
       setTitle(value);
     } else if (id === "content") {
       setContent(value);
+      setSanitizedContent(value.replace(/<\/?[^>]+(>|$)/g, ""));
     }
   };
 
@@ -81,8 +83,6 @@ const Upload = () => {
       await uploadBytes(imageStorageRef, image);
       imageUrl = await getDownloadURL(ref(storage, `images/${image.name}`));
     }
-
-    const sanitizedContent = content.replace(/<\/?[^>]+(>|$)/g, "");
 
     await addDoc(collection(db, "contents"), { title, content, sanitizedContent, imageUrl });
     console.log("Uploaded!");

@@ -31,7 +31,8 @@ export default class Blogbutton extends Component {
     return (
       <Button>
         <Link to='/listPage'>
-            <Logo src="/public/wordpress.svg"/>
+            <Logo src="/wordpress.svg"/>
+            블로그 바로가기
         </Link>
       </Button>
     )
