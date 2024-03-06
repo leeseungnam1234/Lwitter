@@ -40,6 +40,33 @@ const MenuItem = styled.div`
             fill:tomato;
         }
     }
+    
+    .bloglist{
+        text-align:center;
+    }
+`
+const MenuItem2 = styled.div`
+    cursor: pointer;
+    color:#00f947;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid white;
+    height:50px;
+    width:50px;
+    border-radius:50%;
+    -webkit-text-stroke: thin;
+    svg{
+        width:30px;
+        fill:white;
+    }
+    &.log-out{
+        border-color:tomato;
+        svg{
+            fill:tomato;
+        }
+    }
 `
 
 export default function Layout() {
@@ -81,6 +108,11 @@ export default function Layout() {
                         <MenuItem>
                             <Logo src="/wordpress.svg"/>
                         </MenuItem>
+                    </Link>
+                    <Link to='/listPage' style={{ textDecoration: 'none' }} >
+                        <MenuItem2>
+                            블로그{<br/>}리스트
+                        </MenuItem2>
                     </Link>
 
                 </Menu>
