@@ -82,7 +82,7 @@ const ListPage = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = contents.slice(indexOfFirstItem, indexOfLastItem);
-
+  
   return (
     <Container>
       <Title>업로드된 컨텐츠 목록</Title>

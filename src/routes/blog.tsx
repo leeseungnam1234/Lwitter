@@ -67,7 +67,7 @@ const Upload = () => {
       setTitle(value);
     } else if (id === "content") {
       setContent(value);
-      setSanitizedContent(value.replace(/<\/?[^>]+(>|$)/g, ""));
+      setSanitizedContent(value.replace(/<\/?[^>]+(>|$)/g, "").replace(/\n|\r/g, "\n"));
     }
   };
 
@@ -96,6 +96,8 @@ const Upload = () => {
       <Textarea id="content" placeholder="내용을 입력해주세요." onChange={handleOnChange} />
       <Input id="image" type="file" onChange={handleImageChange} />
       {user && <Button onClick={uploadContent}>업로드</Button>}
+            {/* Display sanitizedContent */}
+      <div dangerouslySetInnerHTML={{__html:sanitizedContent}}/>
     </Container>
   );
 };
