@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { auth } from "../firebase";
 
 const Logo = styled.img`
-    height:25px;
+    height:auto;
     background-color: white;
 `
 const Wrapper = styled.div`
@@ -30,6 +30,34 @@ const MenuItem = styled.div`
     height:50px;
     width:50px;
     border-radius:50%
+    svg{
+        width:30px;
+        fill:white;
+    }
+    &.log-out{
+        border-color:tomato;
+        svg{
+            fill:tomato;
+        }
+    }
+    
+    .bloglist{
+        text-align:center;
+    }
+`
+
+const MenuItem2 = styled.div`
+    cursor: pointer;
+    color:#00f947cd;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid white;
+    height:60px;
+    width:60px;
+    border-radius:50%;
+    -webkit-text-stroke: thin;
     svg{
         width:30px;
         fill:white;
@@ -81,6 +109,11 @@ export default function Layout() {
                         <MenuItem>
                             <Logo src="/wordpress.svg"/>
                         </MenuItem>
+                    </Link>
+                    <Link to='/listPage' style={{ textDecoration: 'none' }} >
+                        <MenuItem2>
+                            블로그{<br/>}리스트
+                        </MenuItem2>
                     </Link>
 
                 </Menu>
