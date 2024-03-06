@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { auth } from "../firebase";
 
 const Logo = styled.img`
-    height:25px;
+    height:auto;
     background-color: white;
 `
 const Wrapper = styled.div`
@@ -45,16 +45,17 @@ const MenuItem = styled.div`
         text-align:center;
     }
 `
+
 const MenuItem2 = styled.div`
     cursor: pointer;
-    color:#00f947;
+    color:#00f947cd;
     font-size:15px;
     display:flex;
     align-items:center;
     justify-content:center;
     border:2px solid white;
-    height:50px;
-    width:50px;
+    height:60px;
+    width:60px;
     border-radius:50%;
     -webkit-text-stroke: thin;
     svg{

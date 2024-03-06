@@ -7,6 +7,7 @@ const Wrapper = styled.div`
     gap:50px;
     overflow-y: scroll;
     grid-template-rows: 1tr 5tr;
+    padding-right:20px;
 `
 
 export default function Home(){
