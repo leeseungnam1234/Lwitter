@@ -1,3 +1,5 @@
+재배포,Package.json 배포및빌드 명령어, git 명령어
+
 재변경 , 배포시
 npm run deploy
 ===========
@@ -12,6 +14,14 @@ npm i react-router-dom@6.14.2
 npm i styled-reset
 npm i styled-components@6.0.7
 npm i @types/styled-components -D
+
+Package.json 명령어
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "firebase deploy"
 
 Git init
 보통 프로젝트를 처음 시작할 때 git 저장소를 만들기 위해 사용한다. '초기화'한다는 뜻이지만 내용이 존재하지 않아도 상관없다. git이라는 디렉터리를 빈 저장소로 만들어 준다는 의미로 입력해보자!
