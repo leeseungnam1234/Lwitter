@@ -43,6 +43,7 @@ const Button = styled.button`
 const Upload = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [sanitizedContent, setSanitizedContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ const Upload = () => {
       setTitle(value);
     } else if (id === "content") {
       setContent(value);
+      setSanitizedContent(value.replace(/<\/?[^>]+(>|$)/g, "").replace(/\n|\r/g, "\n"));
     }
   };
 
@@ -82,8 +84,6 @@ const Upload = () => {
       imageUrl = await getDownloadURL(ref(storage, `images/${image.name}`));
     }
 
-    const sanitizedContent = content.replace(/<\/?[^>]+(>|$)/g, "");
-
     await addDoc(collection(db, "contents"), { title, content, sanitizedContent, imageUrl });
     console.log("Uploaded!");
 
@@ -96,6 +96,8 @@ const Upload = () => {
       <Textarea id="content" placeholder="내용을 입력해주세요." onChange={handleOnChange} />
       <Input id="image" type="file" onChange={handleImageChange} />
       {user && <Button onClick={uploadContent}>업로드</Button>}
+            {/* Display sanitizedContent */}
+      <div dangerouslySetInnerHTML={{__html:sanitizedContent}}/>
     </Container>
   );
 };

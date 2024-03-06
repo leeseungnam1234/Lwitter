@@ -67,7 +67,9 @@ export default function Timeline() {
     return (
         <Wrapper>
             {tweets.map((tweet)=>(
-                <Tweet key={tweet.id} {...tweet}/>
+                <Tweet onDelete={function (): void {
+                    throw new Error("Function not implemented.")
+                } } key={tweet.id} {...tweet}/>
             ))}
         </Wrapper>
     )

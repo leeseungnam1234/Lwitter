@@ -13,7 +13,7 @@ const Container = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #333;
+  color: #94bee8;
 `;
 
 const List = styled.ul`
@@ -23,8 +23,8 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1.8px solid #ccc;
+  border-radius: 10px;
   padding: 10px;
 `;
 
@@ -36,7 +36,8 @@ const ContentLink = styled(Link)`
 
 const ContentTitle = styled.h3`
   margin-bottom: 10px;
-  color: #007bff;
+  color: #94bee8;
+  font-size: 20px;
 `;
 
 const Image = styled.img`
@@ -48,6 +49,8 @@ const Image = styled.img`
 
 const ListPage = () => {
   const [contents, setContents] = useState<{ id: string; title: string; content: string; imageUrl: string | null; }[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     const fetchContents = async () => {
@@ -68,19 +71,36 @@ const ListPage = () => {
     fetchContents();
   }, []);
 
+  const nextPage = () => {
+    setCurrentPage(prevPage => prevPage + 1);
+  };
+
+  const prevPage = () => {
+    setCurrentPage(prevPage => prevPage - 1);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = contents.slice(indexOfFirstItem, indexOfLastItem);
+  
   return (
     <Container>
       <Title>업로드된 컨텐츠 목록</Title>
       <List>
-        {contents.map((content) => (
+        {currentItems.map((content) => (
+
           <ListItem key={content.id}>
-            <ContentLink to={`/contents/${content.id}`}>
+            <ContentLink to={`/contentsPage/${content.id}`}>
               <ContentTitle>{content.title}</ContentTitle>
               {content.imageUrl && <Image src={content.imageUrl} alt="Uploaded" />}
             </ContentLink>
           </ListItem>
         ))}
       </List>
+      <div>
+        <button onClick={prevPage} disabled={currentPage === 1}>이전</button>
+        <button onClick={nextPage} disabled={indexOfLastItem >= contents.length}>다음</button>
+      </div>
     </Container>
   );
 };
