@@ -76,6 +76,9 @@ import styled from "styled-components";
     const [email, setEmail] = useState("");
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    // <string | null>은 TypeScript에서 해당 변수가 문자열 또는 null 값을 가질 수 있음을 나타내는 방법
+    //  이것은 TypeScript의 "유니언 타입(Union Types)"이라 불리는 기능, 이 상태의 초기값으로 문자열 또는 null 값을 가질 수 있음
+
 
     // Firebase Auth 인스턴스를 가져옵니다.
     const auth = getAuth();
@@ -104,27 +107,30 @@ import styled from "styled-components";
     };
     
   // JSX를 사용하여 화면을 표시합니다.
-    return (
-        <Container>
-            <Heading>비밀번호 재설정</Heading>
-            {isSuccess && <SuccessMessage>비밀번호 재설정 이메일이 전송되었습니다.</SuccessMessage>}
-            {error && <ErrorMessage>{error}</ErrorMessage>}
-            <form onSubmit={handleResetPassword}>
-                <FormGroup>
+  return (
+    <Container>
+        <Heading>비밀번호 재설정</Heading> {/* 비밀번호 재설정 페이지의 제목 */}
+        {isSuccess && <SuccessMessage>비밀번호 재설정 이메일이 전송되었습니다.</SuccessMessage>} 
+        {/* isSuccess가 true이면 비밀번호 재설정 이메일이 성공적으로 전송되었다는 메시지를 표시 */}
+
+        {error && <ErrorMessage>{error}</ErrorMessage>} {/* error가 존재하면 해당 오류 메시지를 표시 */}
+        <form onSubmit={handleResetPassword}> {/* 비밀번호 재설정을 위한 폼, onSubmit 이벤트 발생 시 handleResetPassword 함수를 호출 */}
+            <FormGroup>
                 {/* <Label htmlFor="email">이메일</Label> */}
                 <InputField
-                    type="email"
-                    id="email"
-                    placeholder="이메일"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
+                    type="email" /* 입력 필드의 유형: 이메일 */
+                    id="email" /* 입력 필드의 ID */
+                    placeholder="이메일" /* 입력 필드에 표시되는 플레이스홀더 */
+                    value={email} /* 입력 필드의 값 */
+                    onChange={(e) => setEmail(e.target.value)} /* 입력 필드 값 변경 시 setEmail 함수 호출 */
+                    required /* 필수 입력 필드 여부 */
                 />
-                </FormGroup>
-                <SubmitButton type="submit">비밀번호 재설정 보내기</SubmitButton>
-            </form>
-        </Container>
-    );
+            </FormGroup>
+            <SubmitButton type="submit">비밀번호 재설정 보내기</SubmitButton> {/* 폼 제출 버튼 */}
+        </form>
+    </Container>
+);
+
 };
 
 export default ForgotPasswordForm;

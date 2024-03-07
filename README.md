@@ -5,7 +5,7 @@ npm run deploy
 ===========
 다음 할 일
 
-1. 
+1. blog-button.tsx 부터 주석 시작
 2. 
 ===========
 

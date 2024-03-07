@@ -1,12 +1,18 @@
 import { styled } from "styled-components"
 
 export const Wrapper = styled.div`
-    height: 100%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
     width:420px;
     padding: 50px 0px;
+    background-color: #222;
+    border-radius: 0 0 50% 50%;
+
+    @media (max-width:768px) {
+        height:80%;
+    }
 `
 export const Title = styled.h1`
     font-size:42px;
