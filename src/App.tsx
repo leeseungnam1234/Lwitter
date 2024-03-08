@@ -15,6 +15,7 @@ import Blog from './routes/blog'
 import Blogbutton from "./routes/blog-button"
 import ListPage from './routes/listPage'
 import ContentsPage from "./routes/contentsPage"
+import BackComponent from './routes/listPage'
 
 // 배열을 routes에 전달
 const router = createBrowserRouter([
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
     {
         path:'contentsPage/:id',
         element:<ContentsPage/> // 클릭한 콘텐츠로 이동
+    },
+    {
+        path:'listPage',
+        element:<BackComponent/>
     }
 ])
 
