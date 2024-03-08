@@ -7,11 +7,12 @@ import { Error, Form, Input, Switcher, Title, Wrapper } from "./auth-components"
 import GithubButton from "./github-btn"
 import GoogleButton from "./google-btn"
 
-// TypeScript에게 errors 객체가 문자열 타입의 인덱스를 가지고 있음을 알려주어야 합니다. 
-// 이를 위해 errors 객체의 타입을 명시적으로 지정해야 합니다.
+/** TypeScript에게 errors 객체가 문자열 타입의 인덱스를 가지고 있음을 알려주어야 합니다. 
+이를 위해 errors 객체의 타입을 명시적으로 지정해야 합니다. */
 interface ErrorMessages {
     [key: string]: string;
 }
+
 const errors:ErrorMessages = {
     'auth/email-already-in-use' : '해당 이메일은 이미 존재합니다.'
     // 해당 오류 코드 : 알림 메세지
@@ -31,13 +32,11 @@ export default function CreateAccount() {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
 
-    
-
-    // 이벤트를 가져와서 type은 HTML INPUT 개체의 React.ChangeEvent가 됨
-    // 이름,이메일,비밀번호 데이터를 가져와서 state에 넘겨줌
+    /** // 이벤트를 가져와서 type은 HTML INPUT 개체의 React.ChangeEvent가 됨
+    // 이름,이메일,비밀번호 데이터를 가져와서 state에 넘겨줌 */
     const onChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const {
-            // event에서 target을 추출
+            /** event에서 target을 추출  */
             target: {name, value}
         } = e
         if (name === 'name')/** name이 name과 같다면 */ {
@@ -50,10 +49,8 @@ export default function CreateAccount() {
         // input 이 변경되면 어떤 input 이 변경 되었는지 확인 가능
     }
     
-    // const onSubmit =async (e:React.FormEvent<HTMLFormElement>) => { // FormEvent 이건 submit를 위한 이벤트
-        // preventDefault   이벤트가 발생했을 때 브라우저가 일반적으로 수행하는 동작을 막을 수 있음
-        // 화면이 새로고침 되지 않도록 preventDefault 해줌
-
+        /**  // preventDefault   이벤트가 발생했을 때 브라우저가 일반적으로 수행하는 동작을 막을 수 있음 
+        // 화면이 새로고침 되지 않도록 preventDefault 해줌 */
     const onSubmit =async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
@@ -69,8 +66,8 @@ export default function CreateAccount() {
             //     displayName:name
             // }) 사용자가 이 코드를 실행 할려면 setLoading이 true로 설정해야 함
 
-            /** createUserWithEmailAndPassword는 await 안에서만 사용 가능 , auth 인증 인스턴스 넣어야됨
-            그 다음 User의 Email과 PW가 필요함 , credentials -> 사용자 자격증명 
+            /** createUserWithEmailAndPassword 는 await 안에서만 사용 가능 , auth 인증 인스턴스 넣어야됨
+            그 다음 User 의 Email과 PW가 필요함 , credentials -> 사용자 자격증명 
             계정을 만들려고 시도 , 성공하면 자격 증명을 받게 되고 , 성공하면 사용자는 app에 즉시 로그인됨*/
 
             // 사용자 프로필을 업데이트

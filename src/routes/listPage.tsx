@@ -11,6 +11,18 @@ const Container = styled.div`
   background-color:#222;
   height: 500px;
   border-radius: 0 30% 30% 0;
+
+  div{
+    display: inline-block;
+    background-color: #222;
+    
+    button{
+      background-color:#314a80;
+      margin-right:10px;
+      font-weight:bold;
+      font-size: 20px;
+    }
+  }
 `;
 
 const Title = styled.h1`

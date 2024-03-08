@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../firebase";
 import { doc, getDoc, DocumentData } from "firebase/firestore";
 import styled from "styled-components";
@@ -142,6 +142,13 @@ const ContentsPage: React.FC = () => {
   // replace(/\n/g, "<br>"): JavaScript의 replace 메서드를 사용하여 문자열 내의 모든 줄바꿈 문자(\n)를 HTML 줄바꿈 태그(<br>)로 대체합니다.
   //  정규식 /.../g는 문자열 내의 모든 패턴을 대체하도록 지정합니다.
 
+  const backComponent = () => {
+    const navigte = useNavigate()
+
+    const goToPage = (path) => {
+      navigate(path)
+    }
+  }
   return (
     <>
       <Container>
@@ -156,6 +163,8 @@ const ContentsPage: React.FC = () => {
         {content.imageUrl && <Image src={content.imageUrl} alt="Uploaded" />}
         {/* {content.imageUrl && <Image src={content.imageUrl} alt="Uploaded" />}은 content.imageUrl 이 존재할 경우에만 
         이미지를 렌더링합니다. 즉, 컨텐츠에 이미지가 포함되어 있는 경우에만 해당 이미지를 표시합니다.  */}
+
+          <button onClick={() => goToPage('/listPage')}>뒤로가기</button>
       </Container>
     </>
   );

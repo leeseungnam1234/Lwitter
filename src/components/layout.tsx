@@ -72,11 +72,20 @@ const MenuItem2 = styled.div`
 
 export default function Layout() {
     const navigate = useNavigate()
+    // 사용자가 로그아웃할 때 호출되는 함수를 정의합니다. 사용자가 로그아웃하려고 할 때 확인 대화 상자를 표시하고, 
+    // 확인을 선택한 경우 Firebase에서 사용자를 로그아웃하고 로그인 페이지로 이동합니다.
     const onLogOut = async() =>{
         const ok = confirm("로그아웃 하시겠습니까?")
+        // confirm("로그아웃 하시겠습니까?"): 사용자에게 로그아웃 여부를 확인하는 메시지 대화 상자를 표시합니다. 
+        // 사용자가 확인(OK)을 선택하면 true를 반환하고, 취소를 선택하면 false를 반환합니다.
+
         if (ok) {
-            await auth.signOut() // Firebase파일에서 생성한 auth인스턴스를 호출한 다음 로그아웃
-            navigate('/login')
+            await auth.signOut() 
+            // await auth.signOut(): Firebase에서 현재 로그인된 사용자를 로그아웃합니다. 
+            // 이 코드는 Firebase에서 생성한 auth 인스턴스의 signOut 메서드를 호출하여 사용자를 로그아웃합니다.
+            
+            // Firebase에서 사용자 로그아웃
+            navigate('/login') // 로그인 페이지로 이동
         }
     }
     return(
