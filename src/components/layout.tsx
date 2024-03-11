@@ -44,6 +44,13 @@ const MenuItem = styled.div`
     .bloglist{
         text-align:center;
     }
+
+    /* .wordpress{
+        border-radius:50%;
+    } */
+    .wordpresslogo{
+        border-radius:50%;
+    }
 `
 
 const MenuItem2 = styled.div`
@@ -114,9 +121,9 @@ export default function Layout() {
                         </svg>
                     </MenuItem>
 
-                    <Link to='/blog'>
-                        <MenuItem>
-                            <Logo src="/wordpress.svg"/>
+                    <Link to='/blog' className="wordpresslogo">
+                        <MenuItem className="wordpress">
+                            <Logo className="wordpresslogo" src="/wordpress.svg"/>
                         </MenuItem>
                     </Link>
                     <Link to='/listPage' style={{ textDecoration: 'none' }} >
