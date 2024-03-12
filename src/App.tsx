@@ -16,6 +16,7 @@ import Blogbutton from "./routes/blog-button"
 import ListPage from './routes/listPage'
 import ContentsPage from "./routes/contentsPage"
 import BackComponent from './routes/listPage'
+import NaverbtnCallBack from './components/NaverBtnCallBack'
 
 // 배열을 routes에 전달
 const router = createBrowserRouter([
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
     {
         path:'listPage',
         element:<BackComponent/>
+    },
+    {
+        path:'naver-btn',
+        element:<NaverbtnCallBack/>
     }
 ])
 
