@@ -7,7 +7,7 @@ import { Error, Form, Input, Switcher, Title, Wrapper } from '../components/auth
 import GithubButton from "../components/github-btn"
 import GoogleButton from "../components/google-btn"
 import Button from '../routes/blog-button'
-import NaverbtnCallBack from '../components/NaverBtnCallBack'
+import NaverBtn from '../components/naverbtn'
 
 // TypeScript에게 errors 객체가 문자열 타입의 인덱스를 가지고 있음을 알려주어야 합니다. 
 // 이를 위해 errors 객체의 타입을 명시적으로 지정해야 합니다.
@@ -115,7 +115,7 @@ export default function CreateAccount() {
                         <Link to='/pw-reset'>찾기 &rarr;</Link>
                     </Switcher>
                     <Button/> {/* 블로그 버튼 */}
-                <NaverbtnCallBack/>
+                <NaverBtn/>
                 <GithubButton/>
                 <GoogleButton/>
         </Wrapper>

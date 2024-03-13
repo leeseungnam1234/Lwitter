@@ -6,6 +6,7 @@ import { FirebaseError } from "firebase/app"
 import { Error, Form, Input, Switcher, Title, Wrapper } from "./auth-components"
 import GithubButton from "./github-btn"
 import GoogleButton from "./google-btn"
+import NaverBtn from '../components/naverbtn'
 
 /** TypeScript에게 errors 객체가 문자열 타입의 인덱스를 가지고 있음을 알려주어야 합니다. 
 이를 위해 errors 객체의 타입을 명시적으로 지정해야 합니다. */
@@ -134,6 +135,7 @@ export default function CreateAccount() {
                     이미 계정이 있으세요?
                     <Link to='/login'>로그인하러가기 &rarr;</Link>
                 </Switcher>
+            <NaverBtn/>
             <GithubButton/>
             <GoogleButton/>
         </Wrapper>
