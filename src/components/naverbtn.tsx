@@ -28,7 +28,7 @@ const NaverBtn = () => {
     <Button>
         {/* 로그인 버튼 이미지를 클릭하면 handleLoginClick 함수가 실행되도록 Link 컴포넌트로 감싸줍니다. */}
         <Link to=''>
-            <LogoImg  onClick={handleLoginClick} src='http://static.nid.naver.com/oauth/small_g_in.PNG' alt='Naver Login'/>
+            <LogoImg  onClick={handleLoginClick} src='https://static.nid.naver.com/oauth/small_g_in.PNG' alt='Naver Login'/>
         </Link>
     </Button>
   );
