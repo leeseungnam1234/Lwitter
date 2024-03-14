@@ -107,12 +107,10 @@ export default function CreateAccount() {
                 {error !== '' ? <Error>{error}</Error> : null}
 
                     <Switcher> {/* Switcher 다른 페이지로 이동할 수 있는 링크를 표시합니다. */}
-                        회원가입
-                        <Link to='/create-account'>하러가기 &rarr;</Link>
+                        <Link to='/create-account'>회원가입 하러가기</Link>
                     </Switcher>
                     <Switcher>
-                        비밀번호
-                        <Link to='/pw-reset'>찾기 &rarr;</Link>
+                        <Link to='/pw-reset'>비밀번호 찾기</Link>
                     </Switcher>
                     <Button/> {/* 블로그 버튼 */}
                 <NaverBtn/>

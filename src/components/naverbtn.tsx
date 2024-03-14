@@ -9,7 +9,8 @@ const LogoImg = styled.img`
     margin-bottom: -25px;
     height: 50px;
     width: 250px;
-    padding: 10px;
+    /* padding: 10px; */
+    border-radius: 25px;
 `;
 
 const client_id = 'SOuP1wryN6wmT06434A7' // 클라이언트 ID를 지정합니다.

@@ -7,7 +7,7 @@ const Button = styled.span`
     margin-top:40px;
     background-color: white;
     font-weight:500;
-    width:100%;
+    width:60%;
     color:black;
     padding:10px 20px;
     border-radius:50px;

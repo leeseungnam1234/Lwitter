@@ -31,7 +31,7 @@ const Textarea = styled.textarea`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-`;
+`
 
 const Button = styled.button`
   padding: 10px 20px;
@@ -40,6 +40,7 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
 `;
 
 const Upload = () => {

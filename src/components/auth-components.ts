@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
     padding: 50px 0px;
     background-color: #222;
     border-radius: 0 0 50% 50%;
-
     @media (max-width:768px) {
         height:80%;
     }
@@ -50,7 +49,8 @@ export const Switcher = styled.span`
     font-size: 20px;
     a{
         margin-left:10px;
-        color: #1d9bf0;
-        font-size:17px;
+        color: whitesmoke;
+        font-size:20px;
+        text-decoration-line:none;
     }
 `

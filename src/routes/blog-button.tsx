@@ -13,7 +13,7 @@ const Button = styled.span`
     margin-top:40px;
     background-color: white;
     font-weight:500;
-    width:100%;
+    width:60%;
     color:black;
     padding:10px 20px;
     border-radius:50px;
@@ -23,6 +23,9 @@ const Button = styled.span`
     align-items:center;
     justify-content:center;
     cursor: pointer;
+    a{
+      text-decoration-line:none;
+    }
 `
 
 export default class Blogbutton extends Component {
@@ -30,7 +33,7 @@ export default class Blogbutton extends Component {
   render() {
     return (
       <Button>
-        <Link to='/listPage'>
+        <Link  to='/listPage'>
             <Logo src="/wordpress.svg"/>
             블로그 바로가기
         </Link>
