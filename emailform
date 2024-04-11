@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import './App.css'
 
 const App = () => {
   const [IsChecked, setIsChecked] = useState(false);
@@ -23,6 +24,8 @@ const App = () => {
           res => {
             alert('메일이 전송되었습니다.');
             console.log(res);
+            e.target.reset();
+            setIsChecked(false); 
           },
           err => {
             alert('메일 전송에 실패하였습니다. 다시 시도해주세요.');
@@ -75,8 +78,8 @@ const App = () => {
             <div className='CheckBoxText'>개인정보 제공동의</div>
             <div className='bubbleblock'>
               <div className='bubbletext'>
-                IBS 파트너스는 고객 문의사항 접수 및 답변을 위해 아래와 같이<br/>
-                개인정보를 수집,이용합니다.
+                IBS 파트너스는 고객 문의사항 접수 및 답변을 위해 <br/> 
+                아래와 같이 개인정보를 수집,이용합니다.
               </div>
               <div className='bubbletextsmall'>
                 목적: 고객 문의사항 접수 및 답변
@@ -86,9 +89,10 @@ const App = () => {
               </div>
               <div className='bubbletextsmall'>보유 기간: 수집일로부터 1년</div>
               <div className='bubbletextsmall margin'>
-                서비스 이용에 필요한 최소한의 수집 및 이용에 동의하지 않을 수<br/>
-                있으나, 동의를 거부할 경우 서비스 이용에 제한이 있을 수
-                있습니다.
+                서비스 이용에 필요한 최소한의 수집 및 이용에<br/> 
+                동의하지 않을 수 있으나, 동의를 거부할 경우 <br/> 
+                서비스 이용에 제한이 있을 수 있습니다.
+                
               </div>
             </div>
           </div>
