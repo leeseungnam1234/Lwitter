@@ -17,7 +17,9 @@ import ListPage from "./routes/listPage";
 import ContentsPage from "./routes/contentsPage";
 import BackComponent from "./routes/listPage";
 import NaverBtn from "./components/naverbtn";
-import TodoList from "./components/TodoList";
+import TodoListButton from "./TodoListComponents/TodoListButton";
+import TodoListApp from "./TodoListComponents/TodoListApp";
+import TodoListBackButton from "./TodoListComponents/TodoListBackButton";
 // 배열을 routes에 전달
 const router = createBrowserRouter([
   {
@@ -81,8 +83,16 @@ const router = createBrowserRouter([
     element: <NaverBtn />,
   },
   {
-    path: "TodoList",
-    element: <TodoList />,
+    path: "TodoListButton",
+    element: <TodoListButton />,
+  },
+  {
+    path: "TodoListApp",
+    element: <TodoListApp />,
+  },
+  {
+    path: "TodoListBackButton",
+    element: <TodoListBackButton />,
   },
 ]);
 
