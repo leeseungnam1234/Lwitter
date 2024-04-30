@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../firebase";
-import { doc, getDoc, DocumentData } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -17,7 +17,7 @@ const Container = styled.div`
   내용이 컨테이너의 크기를 초과하지 않을 때에는 스크롤바를 표시하지 않습니다. */
 
   @media (max-width: 768px) {
-    padding:10px;
+    padding: 10px;
     max-width: 400px;
     height: 80vh;
   }
@@ -30,7 +30,7 @@ const Title = styled.h1`
   text-align: center;
   border-bottom: 2px solid #333;
   padding-bottom: 10px;
-  
+
   @media (max-width: 768px) {
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -85,34 +85,34 @@ const Loading = styled.div`
 `;
 
 const Container2 = styled.div`
-  button{
+  button {
     display: inline-block;
     margin: 450px 0 0 -350px;
     height: 50px;
     background-color: #efefefc0;
-    font-weight:bold;
+    font-weight: bold;
     font-size: 20px;
   }
-`
+`;
 
-const ContentsPage: React.FC = () => {
-  // useParams<{ id: string }>(): React Router의 useParams 훅을 사용하여 URL의 동적 세그먼트에서 값을 추출합니다. 
+const ContentsPage = () => {
+  // useParams<{ id: string }>(): React Router의 useParams 훅을 사용하여 URL의 동적 세그먼트에서 값을 추출합니다.
   // 이 경우 { id: string } 제네릭을 사용하여 id 매개변수의 유형을 명시합니다. 따라서 id는 문자열 형태로 추출됩니다.
-  const { id } = useParams<{ id: string }>();
-  const [content, setContent] = useState<DocumentData | null>(null);
+  const { id } = useParams();
+  const [content, setContent] = (useState < DocumentData) | (null > null);
 
-    const navigate = useNavigate();
-  
-    // Function to handle button click and navigate to another page
-    const handleClick = () => {
-      // Use the navigate function to navigate to the desired page
-      navigate('/listPage');
-    };
+  const navigate = useNavigate();
 
-  // 초기값은 null입니다. content는 DocumentData 유형 또는 null일 수 있습니다. 
+  // Function to handle button click and navigate to another page
+  const handleClick = () => {
+    // Use the navigate function to navigate to the desired page
+    navigate("/listPage");
+  };
+
+  // 초기값은 null입니다. content는 DocumentData 유형 또는 null일 수 있습니다.
   // 이러한 설정은 Firebase Firestore에서 가져온 문서 데이터를 저장할 때 사용됨
 
-  // useCallback 훅을 사용하여 컴포넌트 재렌더링 시 함수가 재생성되는 것을 방지합니다. 
+  // useCallback 훅을 사용하여 컴포넌트 재렌더링 시 함수가 재생성되는 것을 방지합니다.
   // 이 함수는 id 값이 변경될 때만 재생성됩니다.
   const fetchContent = useCallback(async () => {
     try {
@@ -122,11 +122,11 @@ const ContentsPage: React.FC = () => {
         return;
       }
 
-      // Firestore에서 해당 id를 가진 문서를 가져옵니다. 
+      // Firestore에서 해당 id를 가진 문서를 가져옵니다.
       // 문서가 존재하면 해당 문서의 데이터를 setContent 함수를 사용하여 상태로 설정합니다.
       const docRef = doc(db, "contents", id);
       const docSnap = await getDoc(docRef);
-      
+
       if (docSnap.exists()) {
         setContent(docSnap.data());
       } else {
@@ -162,7 +162,6 @@ const ContentsPage: React.FC = () => {
   // replace(/\n/g, "<br>"): JavaScript의 replace 메서드를 사용하여 문자열 내의 모든 줄바꿈 문자(\n)를 HTML 줄바꿈 태그(<br>)로 대체합니다.
   //  정규식 /.../g는 문자열 내의 모든 패턴을 대체하도록 지정합니다.
 
-  
   return (
     <>
       <Container>
@@ -177,10 +176,9 @@ const ContentsPage: React.FC = () => {
         {content.imageUrl && <Image src={content.imageUrl} alt="Uploaded" />}
         {/* {content.imageUrl && <Image src={content.imageUrl} alt="Uploaded" />}은 content.imageUrl 이 존재할 경우에만 
         이미지를 렌더링합니다. 즉, 컨텐츠에 이미지가 포함되어 있는 경우에만 해당 이미지를 표시합니다.  */}
-
       </Container>
       <Container2>
-        <button onClick={handleClick}>리스트페이지 돌아가기</button> 
+        <button onClick={handleClick}>리스트페이지 돌아가기</button>
       </Container2>
     </>
   );

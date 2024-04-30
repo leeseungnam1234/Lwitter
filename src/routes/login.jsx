@@ -13,16 +13,16 @@ import {
 } from "../components/auth-components";
 import GithubButton from "../components/github-btn";
 import GoogleButton from "../components/google-btn";
-import Button from "../routes/blog-button";
+import Button from "./blog-button";
 import NaverBtn from "../components/naverbtn";
-import TodoListButton from "../components/TodoList";
+import TodoListButton from "../TodoListComponents/TodoListButton";
 
 // TypeScript에게 errors 객체가 문자열 타입의 인덱스를 가지고 있음을 알려주어야 합니다.
 // 이를 위해 errors 객체의 타입을 명시적으로 지정해야 합니다.
-interface ErrorMessages {
-  [key: string]: string;
-}
-const errors: ErrorMessages = {
+// interface ErrorMessages {
+//   [key: string]: string;
+// }
+const errors = {
   "auth/invalid-login-credentials": "아이디 또는 비밀번호를 다시 확인해주세요.",
   // 해당 오류 코드 : 알림 메세지
 };
@@ -37,7 +37,7 @@ export default function CreateAccount() {
 
   // 입력 필드의 변경 이벤트를 처리하는 함수
   // 주어진 이벤트에서 이메일 또는 비밀번호 필드의 변경을 감지하고, 해당 필드에 대한 상태를 업데이트
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e) => {
     //ChangeEvent 를 사용하여 입력 필드의 변경을 처리합니다. 이벤트가 발생한 입력 필드의 타입은 HTMLInputElement
     const {
       target: { name, value },
@@ -55,7 +55,7 @@ export default function CreateAccount() {
   };
 
   //  로그인 폼의 제출 이벤트를 처리하는 함수
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e) => {
     e.preventDefault(); // 기본 제출 동작을 막습니다. 폼 제출 시 페이지를 다시 로드하지 않도록 합니다.
     setError(""); // 에러 상태를 초기화합니다.
 

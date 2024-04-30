@@ -1,21 +1,21 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useSprings, animated } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 import { clamp } from "lodash";
-import move from "lodash-move";
 
-import styles from "../styles.module.css";
+import styles from "../TodoListComponents/styles.module.css";
+import { Link } from "react-router-dom";
 
 const fn =
-  (order: number[], active = false, originalIndex = 0, curIndex = 0, y = 0) =>
-  (index: number) =>
+  (order, active = false, originalIndex = 0, curIndex = 0, y = 0) =>
+  (index) =>
     active && index === originalIndex
       ? {
           y: curIndex * 50 + y,
           scale: 1.1,
           zIndex: 1,
           shadow: 15,
-          immediate: (key: string) => key === "y" || key === "zIndex",
+          immediate: (key) => key === "y" || key === "zIndex",
         }
       : {
           y: order.indexOf(index) * 50,
@@ -25,7 +25,7 @@ const fn =
           immediate: false,
         };
 
-function DraggableList({ items }: { items: string[] }) {
+function DraggableList({ items }) {
   const order = useRef(items.map((_, index) => index)); // Store indices as a local ref, this represents the item order
   const [springs, api] = useSprings(items.length, fn(order.current)); // Create springs, each corresponds to an item, controlling its transform, scale, etc.
   const bind = useDrag(({ args: [originalIndex], active, movement: [, y] }) => {
@@ -62,8 +62,14 @@ function DraggableList({ items }: { items: string[] }) {
 
 export default function App() {
   return (
-    <div className={styles.container}>
-      <DraggableList items={"Lorem".split(" ")} />
-    </div>
+    <Link to="/">
+      <div className={styles.container}>
+        <DraggableList items={"홈으로돌아가기".split(" ")} />
+      </div>
+    </Link>
   );
 }
+//   <Link to="/todolist">
+//     {/* <Logo src="/wordpress.svg"/> */}
+//     TodoList 바로가기
+//   </Link>
