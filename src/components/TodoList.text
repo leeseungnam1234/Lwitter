@@ -1,0 +1,36 @@
+import { useState } from "react";
+import { useSpring, animated } from "@react-spring/web"
+
+// import { Link } from "react-router-dom";
+// import { styled } from "styled-components";
+
+// const Button = styled.span`
+//   background: white;
+// `;
+
+const TodoList = () => {
+  const [isHovered, setIsHovered] = useState(false);
+  const springProps = useSpring({
+    scale: isHovered ? 1.1 : 1,
+    config: { tension: 200, friction: 20 },
+  });
+  return (
+    <animated.button
+      style={{
+        transform: springProps.scale.interpolate((scale) => `scale(${scale})`),
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      TodoList 바로가기
+    </animated.button>
+    // <Button>
+    //   <Link to="/todolist">
+    //     {/* <Logo src="/wordpress.svg"/> */}
+    //     TodoList 바로가기
+    //   </Link>
+    // </Button>
+  );
+};
+
+export default TodoList;
