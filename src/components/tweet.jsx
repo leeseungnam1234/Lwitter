@@ -45,7 +45,7 @@ const DeleteButton = styled.button`
 //     // onDelete: 어떠한 인수도 허용하지 않고 void를 반환하는 함수입니다. 이 함수는 삭제 작업을 처리하기 위한 것입니다.
 // }
 
-//  현재 인증된 사용자가 트윗의 소유자인 경우 조건부로 삭제 버튼을 렌더링합니다.
+//  현재 인증된 사용자가 ��윗의 소유자인 경우 조건부로 삭제 버튼을 렌더링합니다.
 export default function Tweet({ username, photo, tweet, userId, onDelete }) {
   // props를 허용하는 기능 구성 요소입니다.
 
@@ -57,7 +57,7 @@ export default function Tweet({ username, photo, tweet, userId, onDelete }) {
         <Username>{username}</Username>
         <Payload>{tweet}</Payload>
         {user?.uid === userId ? (
-          <DeleteButton onClick={() => onDelete()}>삭제</DeleteButton>
+          <DeleteButton onClick={onDelete}>삭제</DeleteButton>
         ) : null}
         {/* 현재 인증된 사용자의 ID 가 트윗의 userId 와 일치하는 경우 삭제 버튼이 렌더링됩니다. 
                 이 버튼을 클릭하면 'onDelete' 기능이 실행됩니다 */}

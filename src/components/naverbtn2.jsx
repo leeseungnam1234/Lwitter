@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
-import axios from "axios"; // Import Axios for HTTP requests
+import axios from "axios";
 
 const NaverLogin = () => {
   const [apiUrl, setApiUrl] = useState("");
-  const [code] = useState("");
-  const [state] = useState("12345"); // Random string
-  const client_id = "SOuP1wryN6wmT06434A7"; // Your Client ID
+  const [code, setCode] = useState("");
+  const [state] = useState("12345");
+  const client_id = "SOuP1wryN6wmT06434A7";
   const redirectURI = encodeURI("https://lwitter-756bb.web.app");
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const codeParam = urlParams.get("code");
+    if (codeParam) {
+      setCode(codeParam);
+    }
+  }, []);
 
   const handleNaverLogin = () => {
     const url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirectURI}&state=${state}`;
@@ -14,20 +22,21 @@ const NaverLogin = () => {
   };
 
   const handleCallback = () => {
-    axios
-      .get(`/callback?code=${code}&state=${state}`)
-      .then((response) => {
-        console.log(response.data);
-        // Handle response data as needed
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    if (code) {
+      axios
+        .get(`/callback?code=${code}&state=${state}`)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   };
+
   useEffect(() => {
-    // Handle callback when the component mounts or when the callback URL is triggered
     handleCallback();
-  }, []); // Empty dependency array ensures the effect runs only once
+  }, [code]);
 
   return (
     <div>

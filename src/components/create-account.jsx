@@ -14,6 +14,14 @@ import {
 import GithubButton from "./github-btn";
 import GoogleButton from "./google-btn";
 import NaverBtn from "./naverbtn";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setLoading,
+  setName,
+  setEmail,
+  setPassword,
+  setError,
+} from "../store/reducers/userReducer";
 
 /** TypeScript에게 errors 객체가 문자열 타입의 인덱스를 가지고 있음을 알려주어야 합니다. 
 이를 위해 errors 객체의 타입을 명시적으로 지정해야 합니다. */
@@ -33,11 +41,15 @@ const errors = {
 
 export default function CreateAccount() {
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false); // 계정 생성을 시작할 때 true로 바꿈
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const { isLoading, name, email, password, error } = useSelector(
+    (state) => state.user
+  );
+  const dispatch = useDispatch();
+
+  // 예시: 이메일 변경 핸들러
+  const onChangeEmail = (e) => {
+    dispatch(setEmail(e.target.value));
+  };
 
   /** // 이벤트를 가져와서 type은 HTML INPUT 개체의 React.ChangeEvent가 됨
     // 이름,이메일,비밀번호 데이터를 가져와서 state에 넘겨줌 */
@@ -47,11 +59,11 @@ export default function CreateAccount() {
       target: { name, value },
     } = e;
     if (name === "name") {
-      /** name이 name과 같다면 */ setName(value); // name을 value로 지정
+      /** name이 name과 같다면 */ dispatch(setName(value)); // name을 value로 지정
     } else if (name === "email") {
-      /** name이 email과 같다면*/ setEmail(value); // email를 value값으로 지정
+      /** name이 email과 같다면*/ dispatch(setEmail(value)); // email를 value값으로 지정
     } else if (name === "password") {
-      /** name이 password와 같다면*/ setPassword(value); // password를 input의 value값으로 지정
+      /** name이 password와 같다면*/ dispatch(setPassword(value)); // password를 input의 value값으로 지정
     }
     // input 이 변경되면 어떤 input 이 변경 되었는지 확인 가능
   };
@@ -61,14 +73,14 @@ export default function CreateAccount() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    setError("");
+    dispatch(setError(""));
     if (isLoading || name === "" || email === "" || password === "") return;
     // 이메일과 비밀번호가 비어 있지 않은지 확인 , isLoading중이라면 처리 중이라는 의미
     // name, email, pw가 비워져 있을경우 그냥 리턴 해주고 (함수를) 끝내라
 
     // 시도
     try {
-      setLoading(true);
+      dispatch(setLoading(true));
       // await updateProfile(credentials.user,{
       //     displayName:name
       // }) 사용자가 이 코드를 실행 할려면 setLoading이 true로 설정해야 함
@@ -103,10 +115,10 @@ export default function CreateAccount() {
         // 메시지를 찾습니다. 만약 해당 오류 코드에 대응하는 메시지가 없다면
         // 기본적인 오류 메시지를 사용합니다. 그리고 이를 setError 함수에 전달하여 상태를 업데이트합니다.
         const errorMessage = errors[e.code] || "오류가 발생했습니다.";
-        setError(errorMessage);
+        dispatch(setError(errorMessage));
       }
     } finally {
-      setLoading(false);
+      dispatch(setLoading(false));
     }
   };
 
