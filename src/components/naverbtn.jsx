@@ -5,7 +5,7 @@ const Button = styled.div``;
 const LogoImg = styled.img`
   margin-top: 50px;
   margin-bottom: -25px;
-  height: 50px;
+  height: 65px;
   width: 250px;
   padding: 2px;
   border-radius: 25px;

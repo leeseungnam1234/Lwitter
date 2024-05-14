@@ -48,10 +48,10 @@ const Upload = () => {
   const [sanitizedContent, setSanitizedContent] = useState("");
 
   // 초기값은 null이며, 파일 객체를 나타내는 File 타입 또는 null을 가집니다.
-  const [image, setImage] = (useState < File) | (null > null);
+  const [image, setImage] = useState(null);
 
   // 초기값은 null이며, 사용자 정보를 나타내는 User 타입 또는 null을 가집니다.
-  const [user, setUser] = (useState < user) | (null > null);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {

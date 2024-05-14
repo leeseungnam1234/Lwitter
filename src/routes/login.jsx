@@ -1,4 +1,10 @@
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setEmail,
+  setPassword,
+  setLoading,
+  setError,
+} from "../store/actions/loginActions";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
@@ -27,59 +33,38 @@ const errors = {
   // 해당 오류 코드 : 알림 메세지
 };
 
-// 하는 일은 form으로부터 이메일과 암호를 가져옴
-export default function CreateAccount() {
+export default function Login() {
+  const dispatch = useDispatch();
+  const { email, password, isLoading, error } = useSelector(
+    (state) => state.login
+  );
   const navigate = useNavigate();
-  const [isLoading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  // 입력 필드의 변경 이벤트를 처리하는 함수
-  // 주어진 이벤트에서 이메일 또는 비밀번호 필드의 변경을 감지하고, 해당 필드에 대한 상태를 업데이트
   const onChange = (e) => {
-    //ChangeEvent 를 사용하여 입력 필드의 변경을 처리합니다. 이벤트가 발생한 입력 필드의 타입은 HTMLInputElement
-    const {
-      target: { name, value },
-    } = e;
-    // name 과 value 속성을 추출하여 구조 분해 할당, name 속성은 변경된 입력 필드의 이름을, value 속성은 변경된 값(value)을 나타냅니다.
+    const { name, value } = e.target;
     if (name === "email") {
-      setEmail(value);
+      dispatch(setEmail(value));
     } else if (name === "password") {
-      setPassword(value);
+      dispatch(setPassword(value));
     }
-    // 입력 필드의 이름을 확인하여 어떤 상태를 업데이트할지 결정
-    // 이메일입력 필드의 경우 setEmail 함수를 호출하여 email 상태를 업데이트하고,
-    // 비밀번호 입력 필드의 경우 setPassword 함수를 호출하여 password 상태를 업데이트합니다.
-    // 이렇게 하면 입력 필드의 값이 변경될 때마다 해당하는 상태를 업데이트하여 React 컴포넌트의 UI를 동적으로 변경
   };
 
-  //  로그인 폼의 제출 이벤트를 처리하는 함수
   const onSubmit = async (e) => {
-    e.preventDefault(); // 기본 제출 동작을 막습니다. 폼 제출 시 페이지를 다시 로드하지 않도록 합니다.
-    setError(""); // 에러 상태를 초기화합니다.
-
-    //  로딩 중인지, 이메일 또는 비밀번호가 비어 있는지를 확인하고, 하나라도 해당하는 경우 함수를 종료합니다.
+    e.preventDefault();
+    dispatch(setError(""));
     if (isLoading || email === "" || password === "") return;
-    try {
-      setLoading(true); // 로딩 상태를 설정합니다.
 
-      // Firebase의 signInWithEmailAndPassword 함수를 사용하여 사용자 인증을 시도합니다.
-      // 이 함수는 이메일과 비밀번호를 인자로 받아 사용자를 인증
-      await signInWithEmailAndPassword(auth, email, password); // 사용자 인증을 시도합니다.
-      navigate("/"); // 로그인 성공 시 홈페이지로 이동합니다.
+    try {
+      dispatch(setLoading(true));
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (e) {
       if (e instanceof FirebaseError) {
-        // Firebase 오류 객체의 코드를 기반으로 오류 메시지를 설정합니다.
         const errorMessage = errors[e.code] || "오류가 발생했습니다.";
-
-        // Firebase 오류 객체의 코드를 기반으로 오류 메시지를 설정하고,
-        // setError 함수를 사용하여 에러 상태를 업데이트합니다.
-        setError(errorMessage); // 오류 메시지를 설정합니다.
+        dispatch(setError(errorMessage));
       }
     } finally {
-      setLoading(false);
-      // try 블록에서 발생한 모든 예외를 처리한 후에 실행되는 코드 블록입니다. 여기서는 로딩 상태를 false로 다시 설정합니다.
+      dispatch(setLoading(false));
     }
   };
 

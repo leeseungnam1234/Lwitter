@@ -62,7 +62,7 @@ function DraggableList({ items }) {
 
 export default function App() {
   return (
-    <Link to="/">
+    <Link to="/login">
       <div className={styles.container}>
         <DraggableList items={"홈으로돌아가기".split(" ")} />
       </div>

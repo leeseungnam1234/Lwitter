@@ -20,6 +20,12 @@ import {
 } from "firebase/firestore";
 // import { ITweet } from "../components/timeline";
 import Tweet from "../components/tweet";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setAvatar,
+  setTweets,
+  removeTweet,
+} from "../store/actions/profileActions";
 
 const Wrapper = styled.div`
   display: flex;
@@ -57,12 +63,10 @@ const Tweets = styled.div`
 
 // 아바타(프로필 사진)를 변경할 때 호출되는 함수
 export default function Profile() {
+  const dispatch = useDispatch();
+  const { avatar, tweets } = useSelector((state) => state.profile);
   const user = auth.currentUser;
-  const [avatar, setAvatar] = useState(user?.photoURL);
-  const [tweets, setTweets] = useState([]);
-  //  초기값으로 빈 배열([])을 전달
 
-  // onAvatarChange 함수는 React.ChangeEvent<HTMLInputElement> 타입의 이벤트를 매개변수로 받습니다.
   const onAvatarChange = async (e) => {
     const { files } = e.target; // e.target.files를 통해 사용자가 선택한 파일에 접근합니다.
     if (!user) return; // if (!user) return;
@@ -75,7 +79,7 @@ export default function Profile() {
 
       const result = await uploadBytes(locationRef, file); // uploadBytes(locationRef, file)를 사용하여 파일을 Firebase Storage에 업로드합니다.
       const avatarUrl = await getDownloadURL(result.ref); //getDownloadURL(result.ref)를 통해 업로드된 파일의 다운로드 URL을 가져옵니다
-      setAvatar(avatarUrl); // setAvatar(avatarUrl)을 사용하여 가져온 다운로드 URL을 상태로 설정합니다.
+      dispatch(setAvatar(avatarUrl)); // dispatch(setAvatar(avatarUrl))을 사용하여 가져온 다운로드 URL을 상태로 설정합니다.
 
       // updateProfile(user, { photoURL: avatarUrl })을 사용하여 사용자의 프로필에 사진 URL을 업데이트합니다.
       await updateProfile(user, {
@@ -112,7 +116,7 @@ export default function Profile() {
         id: doc.id,
       };
     });
-    setTweets(tweets); //setTweets(tweets)를 사용하여 트윗 상태를 업데이트합니다.
+    dispatch(setTweets(tweets)); // dispatch(setTweets(tweets))를 사용하여 트윗 상태를 업데이트합니다.
   };
 
   const handleDelete = async (tweetId) => {
@@ -135,13 +139,11 @@ export default function Profile() {
         await deleteObject(photoRef);
       }
 
-      // setTweets 함수를 사용하여 이전 트윗 상태를 업데이트
+      // dispatch(removeTweet(tweetId))을 사용하여 이전 트윗 상태를 업데이트
       // prevTweets 매개변수는 현재 트윗 상태를 나타냅니다.
       //  filter() 메서드를 사용하여 이전 트윗 배열에서 삭제된 트윗을 제외한 새로운 트윗 배열을 생성합니다.
       //  삭제된 트윗의 ID가 tweetId와 일치하지 않는 트윗만을 남겨둡니다.
-      setTweets((prevTweets) =>
-        prevTweets.filter((tweet) => tweet.id !== tweetId)
-      );
+      dispatch(removeTweet(tweetId));
     } catch (error) {
       // try-catch 블록은 삭제 작업이 실패할 경우를 처리합니다. 만약 오류가 발생하면, 콘솔에 오류 메시지를 기록
       console.error("Error deleting tweet:", error);
