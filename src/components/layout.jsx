@@ -1,6 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
+import InstagramButton from "./instargram-btn";
 
 const Logo = styled.img`
   height: 30px;
@@ -161,6 +162,7 @@ export default function Layout() {
           <Link to="/TodoListApp" style={{ textDecoration: "none" }}>
             <TodoListButtonStyle>Todo List</TodoListButtonStyle>
           </Link>
+          <InstagramButton />
         </Menu>
         <Outlet />
       </Wrapper>

@@ -1,30 +1,21 @@
-import React, { createContext, useContext, useReducer, useRef } from "react";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useRef,
+  useEffect,
+  useState,
+} from "react";
+import { getAuth } from "firebase/auth";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
-const initialTodos = [
-  {
-    id: 1,
-    text: "프로젝트 생성하기",
-    done: true,
-  },
-  {
-    id: 2,
-    text: "컴포넌트 스타일링하기",
-    done: true,
-  },
-  {
-    id: 3,
-    text: "Context 만들기",
-    done: false,
-  },
-  {
-    id: 4,
-    text: "기능 구현하기",
-    done: false,
-  },
-];
+const initialTodos = [];
 
 const todoReducer = (state, action) => {
   switch (action.type) {
+    case "LOAD":
+      return action.todos;
     case "CREATE":
       return state.concat(action.todo);
     case "TOGGLE":
@@ -34,7 +25,7 @@ const todoReducer = (state, action) => {
     case "REMOVE":
       return state.filter((todo) => todo.id !== action.id);
     default:
-      throw new Error(`${action.type}`);
+      throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
 
@@ -43,8 +34,27 @@ const TodoDispatchContext = createContext();
 const TodoNextIdContext = createContext();
 
 const TodoProvider = ({ children }) => {
-  const nextId = useRef(5);
   const [state, dispatch] = useReducer(todoReducer, initialTodos);
+  const nextId = useRef(0);
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    const loadTodos = async () => {
+      if (user) {
+        const docRef = doc(db, "todoLists", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const loadedTodos = docSnap.data().todos;
+          dispatch({ type: "LOAD", todos: loadedTodos });
+          nextId.current = loadedTodos.length + 1;
+        }
+      }
+    };
+
+    loadTodos();
+  }, [user]);
+
   return (
     <TodoStateContext.Provider value={state}>
       <TodoDispatchContext.Provider value={dispatch}>
@@ -61,21 +71,21 @@ export default TodoProvider;
 export function useTodoState() {
   const context = useContext(TodoStateContext);
   if (!context) {
-    throw new Error("TodoStateContext Error");
+    throw new Error("Cannot find TodoStateContext");
   }
   return context;
 }
 export function useTodoDispatch() {
   const context = useContext(TodoDispatchContext);
   if (!context) {
-    throw new Error("TodoDispatchContext Error");
+    throw new Error("Cannot find TodoDispatchContext");
   }
   return context;
 }
 export function useTodoNextId() {
   const context = useContext(TodoNextIdContext);
   if (!context) {
-    throw new Error("TodoNextIdContext Error");
+    throw new Error("Cannot find TodoNextIdContext");
   }
   return context;
 }
