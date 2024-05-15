@@ -6,33 +6,48 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 3fr 1fr;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  background-color: #f4f4f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 `;
-const Column = styled.div``;
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+`;
 const Photo = styled.img`
   width: 100px;
   height: 100px;
-  border-radius: 15px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
 `;
 const Username = styled.span`
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #333;
 `;
 const Payload = styled.p`
   margin: 10px 0px;
-  font-size: 18px;
+  font-size: 16px;
+  color: #666;
 `;
 const DeleteButton = styled.button`
-  background-color: tomato;
+  background-color: #ff6347;
   color: white;
-  font-weight: 600;
-  border: 0;
-  font-size: 12px;
-  padding: 5px 10px;
+  font-weight: bold;
+  border: none;
+  font-size: 14px;
+  padding: 8px 12px;
   text-transform: uppercase;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color: #ff2c1f;
+  }
 `;
 // interface Props {
 //     id: string;

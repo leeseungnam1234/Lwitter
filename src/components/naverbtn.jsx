@@ -1,14 +1,34 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Button = styled.div``;
+const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #1ec800;
+  border-radius: 100px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 15px 0 -20px 0;
+  &:hover {
+    background-color: #19b200;
+  }
+  @media (max-width: 480px) {
+    padding: 8px;
+    margin: 10px 0 -15px 0;
+  }
+`;
+
 const LogoImg = styled.img`
-  margin-top: 50px;
-  margin-bottom: -25px;
-  height: 65px;
-  width: 250px;
-  padding: 2px;
-  border-radius: 25px;
+  height: 2.5rem;
+  width: 200px;
+  border-radius: 100px;
+  @media (max-width: 480px) {
+    width: 180px;
+    height: 2.3rem;
+  }
 `;
 
 const client_id = "SOuP1wryN6wmT06434A7"; // 클라이언트 ID를 지정합니다.
