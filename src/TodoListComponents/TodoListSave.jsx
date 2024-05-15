@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useTodoState } from "./TodoContext"; // TodoContext에서 useTodoState를 가져옵니다.
 
 const SaveButton = styled.button`
@@ -28,6 +28,23 @@ const TodoListSave = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   const todos = useTodoState(); // 현재 할 일 목록을 가져옵니다.
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      if (user) {
+        const docRef = doc(db, "todoLists", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          console.log("데이터 로드 성공:", docSnap.data().todos);
+        } else {
+          console.log("저장된 데이터가 없습니다.");
+        }
+      }
+    };
+
+    fetchTodos();
+  }, [user]);
+
   const handleSave = async () => {
     if (user) {
       const todoListData = {
@@ -36,6 +53,7 @@ const TodoListSave = () => {
       };
       const docRef = doc(db, "todoLists", user.uid);
       await setDoc(docRef, todoListData);
+      alert("✅ 저장이 완료되었습니다!");
       console.log("Todo List가 사용자 ID에 저장되었습니다: ", user.uid);
     } else {
       console.log("사용자가 로그인하지 않았습니다.");

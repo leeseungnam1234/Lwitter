@@ -42,6 +42,9 @@ const CircleButton = styled.div`
       }
       transform: translate(200%, 45%) rotate(45deg);
     `}
+  @media (max-width: 768px) {
+    left: 10px;
+  }
 `;
 const InsertFormPositioner = styled.div`
   width: 100%;
