@@ -9,37 +9,47 @@ import styled from "styled-components";
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  /* flex-direction 속성은 flex 컨테이너 안의 자식 요소들의 배치 방향을 지정합니다.
-   값 column은 요소들을 세로 방향으로 나열하도록 설정합니다. */
   align-items: center;
   margin-top: 20px;
   width: 100%;
+  padding: 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 `;
 
 const Input = styled.input`
   width: 80%;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  font-size: 16px;
 `;
 
 const Textarea = styled.textarea`
   width: 80%;
   height: 300px;
-  margin-bottom: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  font-size: 16px;
+  resize: none;
 `;
 
 const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
+  padding: 12px 24px;
+  background-color: #28a745;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #218838;
+  }
 `;
 
 const Upload = () => {
