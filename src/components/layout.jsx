@@ -1,7 +1,7 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
-import InstagramButton from "./instargram-btn";
+import InstagramButton from "../instartgram/instargram-btn";
 
 const Logo = styled.img`
   height: 30px;
