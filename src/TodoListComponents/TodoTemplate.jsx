@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const TodoTemplateBlock = styled.div`
-  width: 512px;
-  height: 768px;
+  width: 100%;
+  max-width: 512px;
+  height: auto;
+  min-height: 768px;
   position: relative;
   background: white;
   border-radius: 16px;
@@ -14,6 +16,12 @@ const TodoTemplateBlock = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 48px;
+    margin-bottom: 16px;
+  }
 `;
 
 const TodoTemplate = ({ children }) => {

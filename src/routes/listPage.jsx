@@ -10,58 +10,77 @@ const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #222;
-  height: 500px;
-  border-radius: 0 30% 30% 0;
+  background-color: #282c34;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   div {
-    display: inline-block;
-    background-color: #222;
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
 
     button {
-      background-color: #314a80;
+      background-color: #4a90e2;
       margin-right: 10px;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 18px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: white;
+      border: none;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #357abd;
+      }
     }
   }
 `;
 
 const Title = styled.h1`
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #94bee8;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-align: center;
 `;
 
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
+  margin-top: 20px;
 `;
 
 const ListItem = styled.li`
   margin-bottom: 20px;
-  border: 1.8px solid #ccc;
+  border: 2px solid #4a90e2;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 const ContentLink = styled(Link)`
   text-decoration: none;
-  color: #333;
+  color: #dddddd;
   display: block;
 `;
 
 const ContentTitle = styled.h3`
   margin-bottom: 10px;
-  color: #94bee8;
-  font-size: 20px;
+  color: #aad4f5;
+  font-size: 24px;
 `;
 
 const Image = styled.img`
-  max-width: 100%;
+  width: 100%;
   height: auto;
   margin-top: 10px;
   border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 `;
 
 const ListPage = () => {

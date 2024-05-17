@@ -7,51 +7,67 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 10px;
-`;
-const TextArea = styled.textarea`
-  border: 2px solid white;
+  gap: 12px;
   padding: 20px;
-  border-radius: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const TextArea = styled.textarea`
+  border: 1px solid #ced4da;
+  padding: 15px;
+  border-radius: 8px;
   font-size: 16px;
-  color: white;
-  background-color: black;
+  color: #495057;
+  background-color: #fff;
   width: 100%;
   resize: none;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   &::placeholder {
+    color: #adb5bd;
     font-size: 16px;
   }
   &:focus {
     outline: none;
     border-color: #1d9bf0;
+    box-shadow: 0 0 0 0.2rem rgba(29, 155, 240, 0.25);
   }
 `;
+
 const AttachFileButton = styled.label`
-  padding: 10px 0px;
+  padding: 10px 15px;
   color: #1d9bf0;
   text-align: center;
-  border-radius: 20px;
-  border: 1px solid #1d9bf0;
+  border-radius: 8px;
+  border: 2px dashed #1d9bf0;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  &:hover {
+    background-color: #1d9bf0;
+    color: white;
+  }
 `;
+
 const AttachFileInput = styled.input`
   display: none;
 `;
+
 const SubmitBtn = styled.input`
   background-color: #1d9bf0;
   color: white;
   border: none;
-  padding: 10px 0px;
-  border-radius: 20px;
+  padding: 12px 0px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  transition: opacity 0.2s;
   &:hover,
   &:active {
-    opacity: 0.8;
+    opacity: 0.85;
   }
 `;
 

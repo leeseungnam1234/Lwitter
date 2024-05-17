@@ -20,6 +20,8 @@ import NaverBtn from "./components/naverbtn";
 import TodoListButton from "./TodoListComponents/TodoListButton";
 import TodoListApp from "./TodoListComponents/TodoListApp";
 import TodoListBackButton from "./TodoListComponents/TodoListBackButton";
+import InstarGramApp from "./instartgram/instargramApp";
+import Sidebar from "./instartgram/Sidebar";
 // 배열을 routes에 전달
 const router = createBrowserRouter([
   {
@@ -93,6 +95,10 @@ const router = createBrowserRouter([
   {
     path: "TodoListBackButton",
     element: <TodoListBackButton />,
+  },
+  {
+    path: "InstartGramApp",
+    element: <InstarGramApp />,
   },
 ]);
 

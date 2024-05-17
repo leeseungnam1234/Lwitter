@@ -5,6 +5,8 @@ import pwResetReducer from "./reducers/pwResetReducer";
 import listReducer from "./reducers/listReducer";
 import userReducer from "./reducers/userReducer";
 import tweetsReducer from "./reducers/tweetsReducer";
+import postsReducer from "../instartgram/postsSlice";
+
 const store = configureStore({
   reducer: {
     login: loginReducer,
@@ -13,6 +15,7 @@ const store = configureStore({
     list: listReducer,
     user: userReducer,
     tweets: tweetsReducer,
+    posts: postsReducer,
   },
 });
 

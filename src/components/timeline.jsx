@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTweets, deleteTweet } from "../store/reducers/tweetsReducer";
-import Tweet from "./Tweet";
+import Tweet from "./tweet";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

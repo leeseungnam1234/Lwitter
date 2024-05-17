@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useSprings, animated } from "@react-spring/web";
 import { useDrag } from "react-use-gesture";
 import { clamp } from "lodash";
+import { getAuth } from "firebase/auth";
 
 import styles from "../TodoListComponents/styles.module.css";
 import { Link } from "react-router-dom";
@@ -46,6 +47,8 @@ function DraggableList({ items }) {
           {...bind(i)}
           key={i}
           style={{
+            textAlign: "center",
+            margin: "-10px 0 0 0",
             zIndex,
             boxShadow: shadow.to(
               (s) => `rgba(0, 0, 0, 0.15) 0px ${s}px ${2 * s}px 0px`
@@ -61,8 +64,10 @@ function DraggableList({ items }) {
 }
 
 export default function App() {
+  const auth = getAuth(); // Firebase Auth 객체 초기화
+  const isLoggedIn = auth.currentUser; // 현재 로그인 상태 확인
   return (
-    <Link to="/login">
+    <Link to={isLoggedIn ? "/" : "/login"}>
       <div className={styles.container}>
         <DraggableList items={"홈으로돌아가기".split(" ")} />
       </div>

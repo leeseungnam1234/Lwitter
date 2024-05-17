@@ -14,7 +14,7 @@
   "dependencies": {
     "@react-firebase/auth": "^0.2.10",
     "@react-spring/web": "^9.7.3",
-    "@reduxjs/toolkit": "^2.2.4",
+    "@reduxjs/toolkit": "^2.2.5",
     "@vitejs/plugin-react": "^4.2.1",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "axios": "^1.6.7",

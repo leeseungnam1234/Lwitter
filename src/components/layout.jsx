@@ -1,11 +1,12 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { auth } from "../firebase";
-import TodoListButton from "../TodoListComponents/TodoListButton";
+import InstagramButton from "../instartgram/instargram-btn";
 
 const Logo = styled.img`
-  height: auto;
+  height: 30px;
   background-color: white;
+  border-radius: 15px;
 `;
 const Wrapper = styled.div`
   display: grid;
@@ -30,7 +31,8 @@ const MenuItem = styled.div`
   border: 2px solid white;
   height: 50px;
   width: 50px;
-  border-radius: 50% svg {
+  border-radius: 50%;
+  svg {
     width: 30px;
     fill: white;
   }
@@ -39,17 +41,6 @@ const MenuItem = styled.div`
     svg {
       fill: tomato;
     }
-  }
-
-  .bloglist {
-    text-align: center;
-  }
-
-  /* .wordpress{
-        border-radius:50%;
-    } */
-  .wordpresslogo {
-    border-radius: 50%;
   }
 `;
 
@@ -77,24 +68,32 @@ const MenuItem2 = styled.div`
   }
 `;
 
+const TodoListButtonStyle = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  color: #139fe0; // 글자색 변경
+  font-weight: bold; // 글자 굵기 추가
+  font-size: 14px; // 글자 크기 설정
+  text-align: center; // 글자 정중앙 정렬
+  /* line-height: 50px; // 글자 높이를 버튼 높이에 맞춤 */
+`;
+
 export default function Layout() {
   const navigate = useNavigate();
-  // 사용자가 로그아웃할 때 호출되는 함수를 정의합니다. 사용자가 로그아웃하려고 할 때 확인 대화 상자를 표시하고,
-  // 확인을 선택한 경우 Firebase에서 사용자를 로그아웃하고 로그인 페이지로 이동합니다.
+
   const onLogOut = async () => {
-    const ok = confirm("로그아웃 하시겠습니까?");
-    // confirm("로그아웃 하시겠습니까?"): 사용자에게 로그아웃 여부를 확인하는 메시지 대화 상자를 표시합니다.
-    // 사용자가 확인(OK)을 선택하면 true를 반환하고, 취소를 선택하면 false를 반환합니다.
-
-    if (ok) {
+    if (confirm("로그아웃 하시겠습니까?")) {
       await auth.signOut();
-      // await auth.signOut(): Firebase에서 현재 로그인된 사용자를 로그아웃합니다.
-      // 이 코드는 Firebase에서 생성한 auth 인스턴스의 signOut 메서드를 호출하여 사용자를 로그아웃합니다.
-
-      // Firebase에서 사용자 로그아웃
-      navigate("/login"); // 로그인 페이지로 이동
+      navigate("/login");
     }
   };
+
   return (
     <>
       <Wrapper>
@@ -161,8 +160,9 @@ export default function Layout() {
             <MenuItem2>블로그{<br />}리스트</MenuItem2>
           </Link>
           <Link to="/TodoListApp" style={{ textDecoration: "none" }}>
-            <TodoListButton />
+            <TodoListButtonStyle>Todo List</TodoListButtonStyle>
           </Link>
+          <InstagramButton />
         </Menu>
         <Outlet />
       </Wrapper>
