@@ -20,6 +20,7 @@ const App = () => {
     <AppContainer>
       <MainContent>
         <Sidebar />
+        <hr />
         <Feed />
       </MainContent>
     </AppContainer>

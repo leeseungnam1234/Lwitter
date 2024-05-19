@@ -22,6 +22,8 @@ import TodoListApp from "./TodoListComponents/TodoListApp";
 import TodoListBackButton from "./TodoListComponents/TodoListBackButton";
 import InstarGramApp from "./instartgram/instargramApp";
 import Sidebar from "./instartgram/Sidebar";
+import Notifications from "./instartgram/notifications";
+
 // 배열을 routes에 전달
 const router = createBrowserRouter([
   {
@@ -99,6 +101,14 @@ const router = createBrowserRouter([
   {
     path: "InstartGramApp",
     element: <InstarGramApp />,
+  },
+  {
+    path: "Notifications",
+    element: <Notifications />,
+  },
+  {
+    path: "Sidebar",
+    element: <Sidebar />,
   },
 ]);
 

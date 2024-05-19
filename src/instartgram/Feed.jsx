@@ -6,7 +6,7 @@ import Post from "./Post";
 const FeedContainer = styled.div`
   flex: 1;
   padding: 20px;
-  background-color: #334;
+  background-color: #333;
 `;
 
 const Feed = () => {
